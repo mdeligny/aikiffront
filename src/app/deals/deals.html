@@ -1,0 +1,40 @@
+<div class="scroller-container container  grey lighten-3" style="height:100%;overflow: auto;" pull-to-refresh hide-on-scroll-down
+     refresh-function="$ctrl.refresh()">
+    <div ng-show="$ctrl.label.length > 0" class="label-filter-container" style="padding:0 10px;">
+        <span class="right black-text" ng-click="$event.stopPropagation();$ctrl.resetLabels();">Voir tous</span>
+        Filtré par: <span ng-repeat="label in $ctrl.label" class="new badge" ng-class="label.color"
+                          ng-click="$event.stopPropagation();$ctrl.removeLabel(label);"
+                          style="position:initial;margin-right:10px;" data-badge-caption="{{label.displayName}}"></span>
+    </div>
+    <ul class="no-margin-top no-border">
+        <!-- Demo: orderDate to remove -->
+
+
+        <li ng-repeat="deal in $ctrl.deals | orderBy : 'orderDate'" ng-click="$ctrl.browseMerchant(deal.merchant);"
+            class="collection-item avatar">
+            <deal-card deal="deal"></deal-card>
+        </li>
+
+        <li ng-if="$ctrl.deals.length === 0" class="collection-item center" style="padding:20px;">
+            <span style="margin:50px 0;display:block;">
+                Pas de deal ... Pour le moment!<br/>
+                Allez dans la section découvrir, et choisissez les commerçants à suivre ! Vous verez leurs annonces dansMyMooj.<br/>
+            </span>
+        </li>
+    </ul>
+    <div ng-class="$ctrl.isLoading ? 'active' : '' " class="white circle z-depth-2 mj-loader-wrapper">
+        <div class="preloader-wrapper small active">
+            <div class="spinner-layer ">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div>
+                <div class="gap-patch">
+                    <div class="circle"></div>
+                </div>
+                <div class="circle-clipper right">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
